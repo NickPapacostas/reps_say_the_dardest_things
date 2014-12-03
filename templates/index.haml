@@ -1,0 +1,18 @@
+!!!
+%html{:lang => "en-US"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    /[if IE]
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">``
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %meta{:charset => "UTF-8"}/
+    %script{src: "bower_components/jquery/dist/jquery.min.js" }
+    %script{src: "bower_components/d3/d3.min.js" }
+    %script{src: "bower_components/topojson/topojson.js" }
+    %script{src: "js/us_map.js" }
+
+  %body 
+    #container{:style => "position: relative; width: 1000px; height: 600px;"}
+
+  
+  %script{src: "js/map_init.js" }
