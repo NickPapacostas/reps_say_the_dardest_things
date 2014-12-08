@@ -8,6 +8,7 @@ var stateClick = function (state) {
   getPhrases(state.id)
 }
 
+
 var getPhrases = function(state) {
   var Sunlight = {
     endpoint: 'http://capitolwords.org/api/phrases.json',
@@ -15,7 +16,7 @@ var getPhrases = function(state) {
       apikey: "3e45fa3f533947169823f6097289a378",
       entity_type: 'state',
       entity_value: state, 
-      n: 3
+      n: parseInt($('#phrase-length').val()) || 3
     },
 
   };
@@ -33,9 +34,7 @@ var getPhrases = function(state) {
   function addResponse(response){
     var responseObj = {};
     responseObj[state] = response;
-    window.response = responseObj;
-    map.updateChoropleth(responseObj)
-
+    map.updateChoropleth(responseObj);
   }
 }
 
@@ -50,9 +49,16 @@ var map = new Datamap({
   geographyConfig: {
     popupTemplate: function(geo, data) {
       if (data) {
-        var phraseList = data.slice(0,5).map(function(r){ return {phrase: r.ngram}});
+        if ($('#number-of-results').val()) {
+          var listLength = parseInt($('#number-of-results').val());
+        } else {
+          var listLength = 10;
+        }
+        var phraseList = data.slice(0,listLength).map(function(r){ return {phrase: r.ngram}});
         var template = Handlebars.compile($('#top-phrase-list').html());
         return template({state: geo.id, phrases: phraseList});        
+      } else {
+        return "<h2>click to load....</h2>"
       }
     }
   }
