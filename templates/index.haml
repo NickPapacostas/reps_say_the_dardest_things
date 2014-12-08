@@ -9,10 +9,25 @@
     %script{src: "bower_components/jquery/dist/jquery.min.js" }
     %script{src: "bower_components/d3/d3.min.js" }
     %script{src: "bower_components/topojson/topojson.js" }
+    %script{src: "bower_components/handlebars/handlebars.min.js" }
     %script{src: "js/us_map.js" }
 
-  %body 
-    #container{:style => "position: relative; width: 1000px; height: 600px;"}
 
-  
-  %script{src: "js/map_init.js" }
+  %script#top-phrase-list{type: "text/x-handlebars-template"}
+    %h3 Top phrases for {{state}}
+    %ol.phrase-list
+      {{#each phrases}}
+      %li.phrase {{phrase}}
+      {{/each}}
+
+  %body
+    %p 
+      Phrase Length (in words, e.g. 6): 
+      %input#phrase-length
+    %p
+      Number of results to display (up to 100): 
+      %input#number-of-results
+
+    #container{:style => "position: relative; width: 1000px; height: 600px;"}
+    #result
+    %script{src: "js/map_init.js" }
