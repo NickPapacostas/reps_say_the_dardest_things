@@ -1,0 +1,78 @@
+!!!
+/
+  Escape Velocity by HTML5 UP
+  html5up.net | @n33co
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+%html
+  %head
+    %title Escape Velocity by HTML5 UP
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}/
+    %meta{:content => "", :name => "description"}/
+    %meta{:content => "", :name => "keywords"}/
+    /[if lte IE 8] <script src="css/ie/html5shiv.js"></script>
+
+    %link{:href => "/css/map.css", :rel => "stylesheet"}/
+    %script{:src => "js/jquery.min.js"}
+    %script{:src => "js/jquery.dropotron.min.js"}
+    %script{:src => "js/skel.min.js"}
+    %script{:src => "js/skel-layers.min.js"}
+    %script{:src => "js/init.js"}
+    %script{src: "bower_components/d3/d3.min.js" }
+    %script{src: "bower_components/topojson/topojson.js" }
+    %script{src: "bower_components/handlebars/handlebars.min.js" }
+    %script{src: "js/us_map.js" }
+
+    %noscript
+      %link{:href => "css/skel.css", :rel => "stylesheet"}/
+      %link{:href => "css/style.css", :rel => "stylesheet"}/
+      %link{:href => "css/style-desktop.css", :rel => "stylesheet"}/
+    /[if lte IE 8] <link rel="stylesheet" href="css/ie/v8.css" />
+
+  %script#top-phrase-list{type: "text/x-handlebars-template"}
+    .phrase-list-container
+      %h3 Top phrases for {{state}}
+      %ol.phrase-list
+        {{#each phrases}}
+        %li.phrase {{phrase}}
+        {{/each}}
+  
+  %body.homepage
+    / Header
+    #header-wrapper.wrapper
+      #header
+        / Logo
+        #logo
+          %h1
+            %a{:href => "index.html"} Shit reps say
+          %p laskdjfasldkfj
+        / Nav
+        %nav#nav
+          %ul
+            %li
+              %a{:href => "#map"} Map
+    / Intro
+    #map.wrapper.style1
+      .title The Map
+      %section#intro.container
+        %p 
+          Phrase Length (in words, up to 5, default 3): 
+          %input#phrase-length
+        %p
+          Number of results to display (up to 100, default 10): 
+          %input#number-of-results
+
+        #map-container
+          #map-element{:style => "position: relative; width: 1000px; height: 600px;"}
+
+        %ul.actions
+          %li
+            %a.button.style3.big#reset-map{:href => "#map"} Reset Map
+      #copyright
+        %ul
+          %li &copy; Untitled
+          %li
+            Design:
+            %a{:href => "http://html5up.net"} HTML5 UP
+
+  %script{src: "js/map_init.js" }
+

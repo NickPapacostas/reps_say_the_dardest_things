@@ -38,29 +38,46 @@ var getPhrases = function(state) {
   }
 }
 
-
-var map = new Datamap({
-  element: document.getElementById('container'),
-  scope: 'usa',
-  done: function(datamap) {
-    mapInit(datamap);
-  },
-  data: {}, 
-  geographyConfig: {
-    popupTemplate: function(geo, data) {
-      if (data) {
-        if ($('#number-of-results').val()) {
-          var listLength = parseInt($('#number-of-results').val());
+function mapConfig(element) {
+  return {
+    element: element,
+    scope: 'usa',
+    done: function(datamap) {
+      mapInit(datamap);
+    },
+    data: {}, 
+    geographyConfig: {
+      popupTemplate: function(geo, data) {
+        if (data) {
+          if ($('#number-of-results').val()) {
+            var listLength = parseInt($('#number-of-results').val());
+          } else {
+            var listLength = 10;
+          }
+          var phraseList = data.slice(0,listLength).map(function(r){ return {phrase: r.ngram}});
+          var template = Handlebars.compile($('#top-phrase-list').html());
+          return template({state: geo.id, phrases: phraseList});        
         } else {
-          var listLength = 10;
+          return "<h2>click to load....</h2>"
         }
-        var phraseList = data.slice(0,listLength).map(function(r){ return {phrase: r.ngram}});
-        var template = Handlebars.compile($('#top-phrase-list').html());
-        return template({state: geo.id, phrases: phraseList});        
-      } else {
-        return "<h2>click to load....</h2>"
       }
     }
   }
-});
-window.map = map;
+}
+
+var map = new Datamap(mapConfig(document.getElementById('map-element')));
+$(document).ready(function(){
+  $('#reset-map').on('click', function(){
+    $('#map-element').remove()
+    var newMap = document.createElement('div')
+    $(newMap)
+    .attr('id', 'map-element')
+    .css('position', 'relative')
+    .css('width', '1000px')
+    .css('height', '600px');
+    $('#map-container').append(newMap)
+    map = new Datamap(mapConfig(document.getElementById('map-element')));
+  });
+})
+
+
