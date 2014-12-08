@@ -4,6 +4,11 @@
   height: 600px;
 }
 
+#map-container {
+  padding-left: 150px;
+  margin-right: 150px;
+}
+
 .phrase-list-container {
   background-color: gray;
   border-radius: 10px;

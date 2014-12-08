@@ -1,6 +1,6 @@
 
 get '/' do
-  haml :index
+  haml :'index-escape'
 end
 
 get '/escape' do
