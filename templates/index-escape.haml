@@ -31,7 +31,7 @@
   %script#top-phrase-list{type: "text/x-handlebars-template"}
     .phrase-list-container
       %h3 Top phrases for {{state}}
-      %ol.phrase-list
+      %ol.phrase-list{scrolling: "yes", height: "200px"}
         {{#each phrases}}
         %li.phrase {{phrase}}
         {{/each}}
@@ -47,7 +47,7 @@
           %p 
             Fun with the 
             Sunlight Foundation 
-            %a{href: "https://sunlightlabs.github.io/Capitol-Words/"} Capital Words API
+            %a{href: "https://sunlightlabs.github.io/Capitol-Words/", target: "_blank"} Capital Words API
         / Nav
         %nav#nav
           %ul
@@ -60,15 +60,17 @@
 
         #map-container
           #map-element
-        %p 
-          Phrase Length (in words, up to 5, default 3): 
-          %input#phrase-length
-        %p
-          Number of results to display (up to 100, default 10): 
-          %input#number-of-results
-        %ul.actions
-          %li
-            %a.button.style3.big#reset-map{:href => "#map"} Reset Map
+        .controls  
+          %p 
+            Phrase Length (in words, up to 5, default 3): 
+            %input#phrase-length
+          %p
+            Number of results to display (up to 100, default 10): 
+            %input#number-of-results
+          %em After changing values, click again to load
+          %ul.actions
+            %li
+              %a.button.style3.big#reset-map{:href => "#map"} Reset Map
       #copyright
         %ul
           %li 

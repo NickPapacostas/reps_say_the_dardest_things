@@ -42,6 +42,8 @@ function mapConfig(element) {
   return {
     element: element,
     scope: 'usa',
+    popupOnHover: false,
+    highlightOnHover: false,
     done: function(datamap) {
       mapInit(datamap);
     },
@@ -70,11 +72,7 @@ $(document).ready(function(){
   $('#reset-map').on('click', function(){
     $('#map-element').remove()
     var newMap = document.createElement('div')
-    $(newMap)
-    .attr('id', 'map-element')
-    .css('position', 'relative')
-    .css('width', '1000px')
-    .css('height', '600px');
+    $(newMap).attr('id', 'map-element');
     $('#map-container').append(newMap)
     map = new Datamap(mapConfig(document.getElementById('map-element')));
   });
