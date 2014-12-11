@@ -35,7 +35,7 @@
         {{#each phrases}}
         %li.phrase {{phrase}}
         {{/each}}
-  
+
   %body.homepage
     / Header
     #header-wrapper.wrapper
@@ -48,18 +48,21 @@
             Fun with the 
             Sunlight Foundation 
             %a{href: "https://sunlightlabs.github.io/Capitol-Words/", target: "_blank"} Capital Words API
-        / Nav
-        %nav#nav
-          %ul
-            %li
-              %a{:href => "#map"} Map
     / Intro
     #map.wrapper.style1
       .title The Map
       %section#intro.container
+        .row
+          .8u
+            #map-container
+              #map-element
 
-        #map-container
-          #map-element
+          .4u
+            %h2 Results:
+            #current-results
+              Click a state to load some results...
+
+            
         .controls  
           %p 
             Phrase Length (in words, up to 5, default 3): 

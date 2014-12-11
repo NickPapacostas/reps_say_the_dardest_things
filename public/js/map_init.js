@@ -34,6 +34,18 @@ var getPhrases = function(state) {
   function addResponse(response){
     var responseObj = {};
     responseObj[state] = response;
+
+    if ($('#number-of-results').val()) {
+      var listLength = parseInt($('#number-of-results').val());
+    } else {
+      var listLength = 10;
+    }
+
+    var phraseList = response.slice(0,listLength).map(function(r){ return {phrase: r.ngram}});
+    var template = Handlebars.compile($('#top-phrase-list').html());
+    $('#current-results').html(template({state: state, phrases: phraseList}));        
+    
+
     map.updateChoropleth(responseObj);
   }
 }
@@ -42,39 +54,31 @@ function mapConfig(element) {
   return {
     element: element,
     scope: 'usa',
-    popupOnHover: false,
-    highlightOnHover: false,
     done: function(datamap) {
       mapInit(datamap);
     },
     data: {}, 
     geographyConfig: {
-      popupTemplate: function(geo, data) {
-        if (data) {
-          if ($('#number-of-results').val()) {
-            var listLength = parseInt($('#number-of-results').val());
-          } else {
-            var listLength = 10;
-          }
-          var phraseList = data.slice(0,listLength).map(function(r){ return {phrase: r.ngram}});
-          var template = Handlebars.compile($('#top-phrase-list').html());
-          return template({state: geo.id, phrases: phraseList});        
-        } else {
-          return "<h2>click to load....</h2>"
-        }
+      popupTemplate: function(geo, data){
+        return "<div class='popup'>" + geo.id + "</div>"
       }
     }
   }
 }
-
 var map = new Datamap(mapConfig(document.getElementById('map-element')));
+
+function resetMap(){
+  $('#map-element').remove();
+  $('#current-results').text("Click a state to load some results...");
+  var newMap = document.createElement('div')
+  $(newMap).attr('id', 'map-element');
+  $('#map-container').append(newMap)
+  map = new Datamap(mapConfig(document.getElementById('map-element')));
+}
+
 $(document).ready(function(){
   $('#reset-map').on('click', function(){
-    $('#map-element').remove()
-    var newMap = document.createElement('div')
-    $(newMap).attr('id', 'map-element');
-    $('#map-container').append(newMap)
-    map = new Datamap(mapConfig(document.getElementById('map-element')));
+    resetMap();
   });
 })
 

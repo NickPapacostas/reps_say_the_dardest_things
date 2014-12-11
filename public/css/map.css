@@ -1,41 +1,38 @@
 #map-element{
   position: relative;
-  width: 1000px; 
   height: 600px;
 }
 
-#map-container {
-  padding-left: 150px;
-  margin-right: 150px;
-}
-
-.phrase-list-container {
-  background-color: gray;
-  border-radius: 10px;
+.popup{
+  background-color: white;
+  color: black;
 }
 
 ol.phrase-list {
   list-style-type: none;
   list-style-type: decimal !ie; /*IE 7- hack*/
 
-  margin: 0;
   margin-left: 4em;
   padding: 0;
+  
+/*  max-height: 500px;
+  overflow-y: scroll;
+*/  counter-reset: li-counter;
 
-  counter-reset: li-counter;
 }
 ol.phrase-list > li{
   position: relative;
   margin-bottom: 5px;
   padding-left: 0.5em;
   min-height: 1em;
+  text-align: left;
 }
 ol.phrase-list > li:before {
   position: absolute;
   top: 0;
   left: -1.33em;
-  width: 1.2em;
-  height: 1.2em;
+  width: 1.5em;
+  height: 1.5em;
 
   font-size: 1.3em;
   line-height: 1.2;
